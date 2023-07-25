@@ -1,0 +1,25 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 40px;
+}
+
+h1 {
+  color: #007bff;
+}
+
+#inputContainer {
+  margin-bottom: 10px;
+}
+
+#draftOrderContainer {
+  margin: 20px 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}
