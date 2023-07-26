@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fantasy Draft Order</title>
@@ -14,10 +13,17 @@
         <input type="text" id="nameInput" placeholder="Enter a name" />
         <button id="addNameBtn">Add Participant</button>
       </div>
-      <div id="draftOrderContainer">
-        <ul id="draftOrderList"></ul>
-      </div>
       <button id="generateBtn">Generate Draft Order</button>
+      <div id="listsContainer">
+        <div id="originalListContainer">
+          <h2>League</h2>
+          <ul id="originalList"></ul>
+        </div>
+        <div id="draftOrderContainer" class="hidden">
+          <h2>Draft Order</h2>
+          <ul id="draftOrderList"></ul>
+        </div>
+      </div>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

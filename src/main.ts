@@ -1,30 +1,36 @@
 const participants: string[] = [];
-let draftOrderShown = false;
+
+const nameInput = document.getElementById("nameInput") as HTMLInputElement;
+
 
 function updateParticipantsDisplay() {
-  const draftOrderList = document.getElementById("draftOrderList") as HTMLUListElement;
-  draftOrderList.innerHTML = ""; 
+  const originalList = document.getElementById("originalList") as HTMLDivElement;
+  originalList.innerHTML = ""; // Clear previous content
 
-  participants.forEach((participant, index) => {
+  participants.forEach(participant => {
     const listItem = document.createElement("li");
-    listItem.textContent = `${index + 1}. ${participant}`;
-    draftOrderList.appendChild(listItem);
+    listItem.textContent = participant;
+    originalList.appendChild(listItem);
   });
 }
 
-function addParticipant() {
+function addParticipant(event: MouseEvent | KeyboardEvent) {
   const nameInput = document.getElementById("nameInput") as HTMLInputElement;
-  const participantName = nameInput.value.trim();
-  if (participantName !== "") {
-    participants.push(participantName);
-    updateParticipantsDisplay();
-    nameInput.value = "";
+
+  if (event.type === "click" || (event instanceof KeyboardEvent && event.key === "Enter")) {
+    const participantName = nameInput.value.trim();
+    if (participantName !== "") {
+      participants.push(participantName);
+      updateParticipantsDisplay();
+      nameInput.value = "";
+    }
   }
 }
 
+
 function generateDraftOrder() {
   if (participants.length === 0) {
-    alert("Please add participants before generating draft order.");
+    alert("Please add participants before generating the draft order.");
     return;
   }
 
@@ -34,13 +40,19 @@ function generateDraftOrder() {
     [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
   }
 
-  participants.length = 0;
-  participants.push(...shuffledParticipants);
+  const draftOrderList = document.getElementById("draftOrderList") as HTMLDivElement;
+  draftOrderList.innerHTML = ""; // Clear previous content
+
+  shuffledParticipants.forEach((participant, index) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${index + 1}. ${participant}`;
+    draftOrderList.appendChild(listItem);
+  });
 
   const draftOrderContainer = document.getElementById("draftOrderContainer") as HTMLDivElement;
   draftOrderContainer.classList.remove("hidden");
-  updateParticipantsDisplay();
 }
 
 document.getElementById("addNameBtn")!.addEventListener("click", addParticipant);
 document.getElementById("generateBtn")!.addEventListener("click", generateDraftOrder);
+nameInput.addEventListener("keydown", addParticipant);

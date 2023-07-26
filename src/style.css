@@ -8,18 +8,26 @@ h1 {
   color: #007bff;
 }
 
+h2 {
+  color: #009900;
+}
+
 #inputContainer {
   margin-bottom: 10px;
 }
 
-#draftOrderContainer {
+#listsContainer {
+  display: flex;
+  justify-content: space-around;
   margin: 20px 0;
-}
-
-ul {
-  list-style-type: none;
 }
 
 .hidden {
   display: none;
+}
+
+/* Remove bullet points from the list */
+#draftOrderList, #originalList {
+  list-style-type: none;
+  padding: 0;
 }
